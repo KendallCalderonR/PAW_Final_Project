@@ -1,0 +1,594 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PAW_FinalProyectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id_Category" />
+          </Key>
+          <Property Name="Id_Category" Type="int" Nullable="false" />
+          <Property Name="NameCategory" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="Id_Item" />
+          </Key>
+          <Property Name="Id_Item" Type="int" Nullable="false" />
+          <Property Name="Id_Status" Type="int" />
+          <Property Name="Id_SubCategory" Type="int" />
+          <Property Name="Description" Type="varchar" MaxLength="100" />
+          <Property Name="Picture" Type="varchar" MaxLength="100" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="Comments" Type="varchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="LostReport">
+          <Key>
+            <PropertyRef Name="Id_Report" />
+          </Key>
+          <Property Name="Id_Report" Type="int" Nullable="false" />
+          <Property Name="Id_User" Type="int" />
+          <Property Name="Description" Type="varchar" MaxLength="100" />
+          <Property Name="Status" Type="varchar" MaxLength="25" />
+          <Property Name="Id_SubCategory" Type="int" />
+        </EntityType>
+        <EntityType Name="Receipt">
+          <Key>
+            <PropertyRef Name="ID_receipt" />
+          </Key>
+          <Property Name="ID_receipt" Type="int" Nullable="false" />
+          <Property Name="Id_User" Type="int" />
+          <Property Name="ItemID" Type="int" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="Id_Status" />
+          </Key>
+          <Property Name="Id_Status" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SubCategory">
+          <Key>
+            <PropertyRef Name="Id_SubCategory" />
+          </Key>
+          <Property Name="Id_SubCategory" Type="int" Nullable="false" />
+          <Property Name="NameSubCategory" Type="varchar" MaxLength="50" />
+          <Property Name="Id_Category" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="UserType">
+          <Key>
+            <PropertyRef Name="Id_UserType" />
+          </Key>
+          <Property Name="Id_UserType" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id_User" />
+          </Key>
+          <Property Name="Id_User" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="30" />
+          <Property Name="Lastname" Type="varchar" MaxLength="30" />
+          <Property Name="ID_Number" Type="varchar" MaxLength="25" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="Id_UserType" Type="int" />
+          <Property Name="User" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <Association Name="FK_Item_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+          <End Role="Item" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id_Status" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="Id_Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_SubCategory">
+          <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="0..1" />
+          <End Role="Item" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubCategory">
+              <PropertyRef Name="Id_SubCategory" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="Id_SubCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LostReport_SubCategory">
+          <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="0..1" />
+          <End Role="LostReport" Type="Self.LostReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubCategory">
+              <PropertyRef Name="Id_SubCategory" />
+            </Principal>
+            <Dependent Role="LostReport">
+              <PropertyRef Name="Id_SubCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LostReport_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="LostReport" Type="Self.LostReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id_User" />
+            </Principal>
+            <Dependent Role="LostReport">
+              <PropertyRef Name="Id_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Receipt_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="0..1" />
+          <End Role="Receipt" Type="Self.Receipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id_Item" />
+            </Principal>
+            <Dependent Role="Receipt">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Receipt_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Receipt" Type="Self.Receipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id_User" />
+            </Principal>
+            <Dependent Role="Receipt">
+              <PropertyRef Name="Id_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubCategory_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id_Category" />
+            </Principal>
+            <Dependent Role="SubCategory">
+              <PropertyRef Name="Id_Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_UserType">
+          <End Role="UserType" Type="Self.UserType" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserType">
+              <PropertyRef Name="Id_UserType" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="Id_UserType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PAW_FinalProyectModelStoreContainer">
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Item" EntityType="Self.Item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LostReport" EntityType="Self.LostReport" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Receipt" EntityType="Self.Receipt" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubCategory" EntityType="Self.SubCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserType" EntityType="Self.UserType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Item_Status" Association="Self.FK_Item_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Item" EntitySet="Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_SubCategory" Association="Self.FK_Item_SubCategory">
+            <End Role="SubCategory" EntitySet="SubCategory" />
+            <End Role="Item" EntitySet="Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LostReport_SubCategory" Association="Self.FK_LostReport_SubCategory">
+            <End Role="SubCategory" EntitySet="SubCategory" />
+            <End Role="LostReport" EntitySet="LostReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LostReport_Usuario" Association="Self.FK_LostReport_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="LostReport" EntitySet="LostReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Receipt_Item" Association="Self.FK_Receipt_Item">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="Receipt" EntitySet="Receipt" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Receipt_Usuario" Association="Self.FK_Receipt_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Receipt" EntitySet="Receipt" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubCategory_Category" Association="Self.FK_SubCategory_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="SubCategory" EntitySet="SubCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_UserType" Association="Self.FK_Usuario_UserType">
+            <End Role="UserType" EntitySet="UserType" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PAW_FinalProyectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id_Category" />
+          </Key>
+          <Property Name="Id_Category" Type="Int32" Nullable="false" />
+          <Property Name="NameCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SubCategory" Relationship="Self.FK_SubCategory_Category" FromRole="Category" ToRole="SubCategory" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="Id_Item" />
+          </Key>
+          <Property Name="Id_Item" Type="Int32" Nullable="false" />
+          <Property Name="Id_Status" Type="Int32" />
+          <Property Name="Id_SubCategory" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Picture" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="Comments" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Status" Relationship="Self.FK_Item_Status" FromRole="Item" ToRole="Status" />
+          <NavigationProperty Name="SubCategory" Relationship="Self.FK_Item_SubCategory" FromRole="Item" ToRole="SubCategory" />
+          <NavigationProperty Name="Receipt" Relationship="Self.FK_Receipt_Item" FromRole="Item" ToRole="Receipt" />
+        </EntityType>
+        <EntityType Name="LostReport">
+          <Key>
+            <PropertyRef Name="Id_Report" />
+          </Key>
+          <Property Name="Id_Report" Type="Int32" Nullable="false" />
+          <Property Name="Id_User" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Id_SubCategory" Type="Int32" />
+          <NavigationProperty Name="SubCategory" Relationship="Self.FK_LostReport_SubCategory" FromRole="LostReport" ToRole="SubCategory" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_LostReport_Usuario" FromRole="LostReport" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Receipt">
+          <Key>
+            <PropertyRef Name="ID_receipt" />
+          </Key>
+          <Property Name="ID_receipt" Type="Int32" Nullable="false" />
+          <Property Name="Id_User" Type="Int32" />
+          <Property Name="ItemID" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_Receipt_Item" FromRole="Receipt" ToRole="Item" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Receipt_Usuario" FromRole="Receipt" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="Id_Status" />
+          </Key>
+          <Property Name="Id_Status" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_Item_Status" FromRole="Status" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="SubCategory">
+          <Key>
+            <PropertyRef Name="Id_SubCategory" />
+          </Key>
+          <Property Name="Id_SubCategory" Type="Int32" Nullable="false" />
+          <Property Name="NameSubCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Id_Category" Type="Int32" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_SubCategory_Category" FromRole="SubCategory" ToRole="Category" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_Item_SubCategory" FromRole="SubCategory" ToRole="Item" />
+          <NavigationProperty Name="LostReport" Relationship="Self.FK_LostReport_SubCategory" FromRole="SubCategory" ToRole="LostReport" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="UserType">
+          <Key>
+            <PropertyRef Name="Id_UserType" />
+          </Key>
+          <Property Name="Id_UserType" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario_UserType" FromRole="UserType" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id_User" />
+          </Key>
+          <Property Name="Id_User" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Lastname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ID_Number" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Id_UserType" Type="Int32" />
+          <Property Name="User" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LostReport" Relationship="Self.FK_LostReport_Usuario" FromRole="Usuario" ToRole="LostReport" />
+          <NavigationProperty Name="Receipt" Relationship="Self.FK_Receipt_Usuario" FromRole="Usuario" ToRole="Receipt" />
+          <NavigationProperty Name="UserType" Relationship="Self.FK_Usuario_UserType" FromRole="Usuario" ToRole="UserType" />
+        </EntityType>
+        <Association Name="FK_SubCategory_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id_Category" />
+            </Principal>
+            <Dependent Role="SubCategory">
+              <PropertyRef Name="Id_Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+          <End Role="Item" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Id_Status" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="Id_Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_SubCategory">
+          <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="0..1" />
+          <End Role="Item" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubCategory">
+              <PropertyRef Name="Id_SubCategory" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="Id_SubCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Receipt_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="0..1" />
+          <End Role="Receipt" Type="Self.Receipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id_Item" />
+            </Principal>
+            <Dependent Role="Receipt">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LostReport_SubCategory">
+          <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="0..1" />
+          <End Role="LostReport" Type="Self.LostReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubCategory">
+              <PropertyRef Name="Id_SubCategory" />
+            </Principal>
+            <Dependent Role="LostReport">
+              <PropertyRef Name="Id_SubCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LostReport_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="LostReport" Type="Self.LostReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id_User" />
+            </Principal>
+            <Dependent Role="LostReport">
+              <PropertyRef Name="Id_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Receipt_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Receipt" Type="Self.Receipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id_User" />
+            </Principal>
+            <Dependent Role="Receipt">
+              <PropertyRef Name="Id_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_UserType">
+          <End Role="UserType" Type="Self.UserType" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserType">
+              <PropertyRef Name="Id_UserType" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="Id_UserType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PAW_FinalProyectEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Category" EntityType="Self.Category" />
+          <EntitySet Name="Item" EntityType="Self.Item" />
+          <EntitySet Name="LostReport" EntityType="Self.LostReport" />
+          <EntitySet Name="Receipt" EntityType="Self.Receipt" />
+          <EntitySet Name="Status" EntityType="Self.Status" />
+          <EntitySet Name="SubCategory" EntityType="Self.SubCategory" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="UserType" EntityType="Self.UserType" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <AssociationSet Name="FK_SubCategory_Category" Association="Self.FK_SubCategory_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="SubCategory" EntitySet="SubCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_Status" Association="Self.FK_Item_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Item" EntitySet="Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_SubCategory" Association="Self.FK_Item_SubCategory">
+            <End Role="SubCategory" EntitySet="SubCategory" />
+            <End Role="Item" EntitySet="Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Receipt_Item" Association="Self.FK_Receipt_Item">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="Receipt" EntitySet="Receipt" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LostReport_SubCategory" Association="Self.FK_LostReport_SubCategory">
+            <End Role="SubCategory" EntitySet="SubCategory" />
+            <End Role="LostReport" EntitySet="LostReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LostReport_Usuario" Association="Self.FK_LostReport_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="LostReport" EntitySet="LostReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Receipt_Usuario" Association="Self.FK_Receipt_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Receipt" EntitySet="Receipt" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_UserType" Association="Self.FK_Usuario_UserType">
+            <End Role="UserType" EntitySet="UserType" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PAW_FinalProyectModelStoreContainer" CdmEntityContainer="PAW_FinalProyectEntities">
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="PAW_FinalProyectModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="Id_Category" ColumnName="Id_Category" />
+                <ScalarProperty Name="NameCategory" ColumnName="NameCategory" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Item">
+            <EntityTypeMapping TypeName="PAW_FinalProyectModel.Item">
+              <MappingFragment StoreEntitySet="Item">
+                <ScalarProperty Name="Id_Item" ColumnName="Id_Item" />
+                <ScalarProperty Name="Id_Status" ColumnName="Id_Status" />
+                <ScalarProperty Name="Id_SubCategory" ColumnName="Id_SubCategory" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LostReport">
+            <EntityTypeMapping TypeName="PAW_FinalProyectModel.LostReport">
+              <MappingFragment StoreEntitySet="LostReport">
+                <ScalarProperty Name="Id_Report" ColumnName="Id_Report" />
+                <ScalarProperty Name="Id_User" ColumnName="Id_User" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Id_SubCategory" ColumnName="Id_SubCategory" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Receipt">
+            <EntityTypeMapping TypeName="PAW_FinalProyectModel.Receipt">
+              <MappingFragment StoreEntitySet="Receipt">
+                <ScalarProperty Name="ID_receipt" ColumnName="ID_receipt" />
+                <ScalarProperty Name="Id_User" ColumnName="Id_User" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="PAW_FinalProyectModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="Id_Status" ColumnName="Id_Status" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubCategory">
+            <EntityTypeMapping TypeName="PAW_FinalProyectModel.SubCategory">
+              <MappingFragment StoreEntitySet="SubCategory">
+                <ScalarProperty Name="Id_SubCategory" ColumnName="Id_SubCategory" />
+                <ScalarProperty Name="NameSubCategory" ColumnName="NameSubCategory" />
+                <ScalarProperty Name="Id_Category" ColumnName="Id_Category" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="PAW_FinalProyectModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserType">
+            <EntityTypeMapping TypeName="PAW_FinalProyectModel.UserType">
+              <MappingFragment StoreEntitySet="UserType">
+                <ScalarProperty Name="Id_UserType" ColumnName="Id_UserType" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="PAW_FinalProyectModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="Id_User" ColumnName="Id_User" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="ID_Number" ColumnName="ID_Number" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id_UserType" ColumnName="Id_UserType" />
+                <ScalarProperty Name="User" ColumnName="User" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
