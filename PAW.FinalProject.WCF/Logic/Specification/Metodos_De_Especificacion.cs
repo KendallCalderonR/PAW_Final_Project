@@ -15,11 +15,27 @@ namespace PAW.FinalProject.WCF.Logic.Specification
             return Result;
         }
 
-        public DB.SubCategory AgregarSubCategoria(string SubCategoria)
+        public DB.SubCategory AgregarSubCategoria(string SubCategoria, int IdCategoria)
         {
             var Action = new Action.Metodos_De_Accion();
-            var Result = Action.AgregarSubCategoria(SubCategoria);
+            var Result = Action.AgregarSubCategoria(SubCategoria, IdCategoria);
             return Result;
         }
+
+        public DB.Category CargarCategoria()
+        {
+            var Action = new Action.Metodos_De_Accion();
+            var Result = Action.CargarCategoria();
+            return Result;
+        }
+
+        public DB.SubCategory CargarSubCategoria()
+        {
+            var Action = new Action.Metodos_De_Accion();
+            var Result = Action.CargarSubCategoria();
+            return Result;
+        }
+
+
     }
 }

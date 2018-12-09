@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using PAW.FinalProject.DB;
+using System.Data;
 
 namespace PAW.FinalProject.WCF.Logic.Repository
 {
     public class Metodos_De_Repositorio
     {
 
-        PAW_FinalProyectEntities _contexto = new PAW_FinalProyectEntities();
+        PAW_FinalProyectEntities1 _contexto = new PAW_FinalProyectEntities1();
 
         public Metodos_De_Repositorio()
         {
@@ -23,11 +24,26 @@ namespace PAW.FinalProject.WCF.Logic.Repository
             return result;
         }
 
-        internal DB.SubCategory AgregarSubCategoria(string SubCategoria)
+        internal DB.SubCategory AgregarSubCategoria(string SubCategoria, int IdCategoria)
         {
-            DB.SubCategory result = new DB.SubCategory { NameSubCategory = SubCategoria };
+            DB.SubCategory result = new DB.SubCategory { NameSubCategory = SubCategoria, Id_Category = IdCategoria};
             return result;
         }
+
+        internal IList<Category> CargarCategoria()
+        {
+            //IList<Category> result = _contexto.Select<Category>.ToList();
+            var result = _contexto.Select<Category>().ToList();
+            return result;
+        }
+
+        internal IList<SubCategory> CargarSubCategoria()
+        {
+            IList<SubCategory> result = _contexto.SubCategory.ToList();
+            return result;
+        }
+
+
 
     }
 }

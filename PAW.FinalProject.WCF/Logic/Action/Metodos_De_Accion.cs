@@ -15,10 +15,24 @@ namespace PAW.FinalProject.WCF.Logic.Action
             return Result;
         }
 
-        public DB.SubCategory AgregarSubCategoria(string SubCategoria)
+        public DB.SubCategory AgregarSubCategoria(string SubCategoria, int IdCategoria)
         {
             var Repository = new Logic.Repository.Metodos_De_Repositorio();
-            var Result = Repository.AgregarSubCategoria(SubCategoria);
+            var Result = Repository.AgregarSubCategoria(SubCategoria, IdCategoria);
+            return Result;
+        }
+
+        public DB.Category CargarCategoria()
+        {
+            var Repository = new Logic.Repository.Metodos_De_Repositorio();
+            var Result = Repository.CargarCategoria();
+            return Result;
+        }
+
+        public DB.SubCategory CargarSubCategoria()
+        {
+            var Repository = new Logic.Repository.Metodos_De_Repositorio();
+            var Result = Repository.CargarSubCategoria();
             return Result;
         }
     }

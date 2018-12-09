@@ -16,7 +16,18 @@ namespace PAW.FinalProject.WCF
         DB.Category AgregarCategoria(string Categoria);
 
         [OperationContract]
-        DB.SubCategory AgregarSubCategoria(string SubCategoria);
+        DB.SubCategory AgregarSubCategoria(string SubCategoria, int IdCategoria);
+
+        [OperationContract]
+        IList<DB.Category> CarcarCategorias();
+
+        [OperationContract]
+        IList<DB.SubCategory> CarcarSubCategorias();
+
+
+
+
+
 
         [OperationContract]
         string GetData(int value);

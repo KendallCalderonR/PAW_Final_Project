@@ -20,7 +20,6 @@ namespace PAW.FinalProject.DB
             this.SubCategory = new HashSet<SubCategory>();
         }
     
-        
         public int Id_Category { get; set; }
         public string NameCategory { get; set; }
     

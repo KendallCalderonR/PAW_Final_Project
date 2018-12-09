@@ -20,10 +20,24 @@ namespace PAW.FinalProject.WCF
             return result;
         }
 
-        public SubCategory AgregarSubCategoria(string SubCategoria)
+        public SubCategory AgregarSubCategoria(string SubCategoria, int IdCategoria)
         {
             var Specification = new Logic.Specification.Metodos_De_Especificacion();
-            var result = Specification.AgregarSubCategoria(SubCategoria);
+            var result = Specification.AgregarSubCategoria(SubCategoria , IdCategoria);
+            return result;
+        }
+
+        public IList<Category> CarcarCategorias()
+        {
+            var Specification = new Logic.Specification.Metodos_De_Especificacion();
+            var result = Specification.CargarCategorias();
+            return result;
+        }
+
+        public IList<SubCategory> CarcarSubCategorias()
+        {
+            var Specification = new Logic.Specification.Metodos_De_Especificacion();
+            var result = Specification.CargarSubCategorias();
             return result;
         }
 
