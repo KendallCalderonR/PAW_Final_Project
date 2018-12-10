@@ -22,14 +22,14 @@ namespace PAW.FinalProject.WCF.Logic.Action
             return Result;
         }
 
-        public DB.Category CargarCategoria()
+        public IList<DB.Category> CargarCategoria()
         {
             var Repository = new Logic.Repository.Metodos_De_Repositorio();
             var Result = Repository.CargarCategoria();
             return Result;
         }
 
-        public DB.SubCategory CargarSubCategoria()
+        public IList<DB.SubCategory> CargarSubCategoria()
         {
             var Repository = new Logic.Repository.Metodos_De_Repositorio();
             var Result = Repository.CargarSubCategoria();
