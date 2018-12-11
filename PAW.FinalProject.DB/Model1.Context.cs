@@ -21,7 +21,13 @@ namespace PAW.FinalProject.DB
             : base("name=PAW_FinalProyectEntities1")
         {
         }
-    
+
+       public PAW_FinalProyectEntities1(string myConnectionString)
+        {
+            this.Database.Connection.ConnectionString = myConnectionString;
+        }
+
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();

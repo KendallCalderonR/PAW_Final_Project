@@ -150,7 +150,15 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ItemsController.cs" />
+    <Compile Include="Controllers\LostReportsController.cs" />
+    <Compile Include="Controllers\ReceiptsController.cs" />
+    <Compile Include="Controllers\StatusController.cs" />
+    <Compile Include="Controllers\SubCategoriesController.cs" />
+    <Compile Include="Controllers\UserTypesController.cs" />
+    <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -193,11 +201,51 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\PAW_Views\PruebaCategoria.cshtml" />
+    <Content Include="Views\Categories\Create.cshtml" />
+    <Content Include="Views\Categories\Delete.cshtml" />
+    <Content Include="Views\Categories\Details.cshtml" />
+    <Content Include="Views\Categories\Edit.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\SubCategories\Create.cshtml" />
+    <Content Include="Views\SubCategories\Delete.cshtml" />
+    <Content Include="Views\SubCategories\Details.cshtml" />
+    <Content Include="Views\SubCategories\Edit.cshtml" />
+    <Content Include="Views\SubCategories\Index.cshtml" />
+    <Content Include="Views\Items\Create.cshtml" />
+    <Content Include="Views\Items\Delete.cshtml" />
+    <Content Include="Views\Items\Details.cshtml" />
+    <Content Include="Views\Items\Edit.cshtml" />
+    <Content Include="Views\Items\Index.cshtml" />
+    <Content Include="Views\LostReports\Create.cshtml" />
+    <Content Include="Views\LostReports\Delete.cshtml" />
+    <Content Include="Views\LostReports\Details.cshtml" />
+    <Content Include="Views\LostReports\Edit.cshtml" />
+    <Content Include="Views\LostReports\Index.cshtml" />
+    <Content Include="Views\Receipts\Create.cshtml" />
+    <Content Include="Views\Receipts\Delete.cshtml" />
+    <Content Include="Views\Receipts\Details.cshtml" />
+    <Content Include="Views\Receipts\Edit.cshtml" />
+    <Content Include="Views\Receipts\Index.cshtml" />
+    <Content Include="Views\Status\Create.cshtml" />
+    <Content Include="Views\Status\Delete.cshtml" />
+    <Content Include="Views\Status\Details.cshtml" />
+    <Content Include="Views\Status\Edit.cshtml" />
+    <Content Include="Views\Status\Index.cshtml" />
+    <Content Include="Views\Usuarios\Create.cshtml" />
+    <Content Include="Views\Usuarios\Delete.cshtml" />
+    <Content Include="Views\Usuarios\Details.cshtml" />
+    <Content Include="Views\Usuarios\Edit.cshtml" />
+    <Content Include="Views\Usuarios\Index.cshtml" />
+    <Content Include="Views\UserTypes\Create.cshtml" />
+    <Content Include="Views\UserTypes\Delete.cshtml" />
+    <Content Include="Views\UserTypes\Details.cshtml" />
+    <Content Include="Views\UserTypes\Edit.cshtml" />
+    <Content Include="Views\UserTypes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\PAW_Views\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
