@@ -33,7 +33,7 @@ namespace PAW.FinalProject.WCF.Logic.Repository
         internal IList<Category> CargarCategoria()
         {
             //IList<Category> result = _contexto.Select<Category>.ToList();
-            var result = _contexto.Select<Category>().ToList();
+            var result = _contexto.Category.ToList();
             return result;
         }
 

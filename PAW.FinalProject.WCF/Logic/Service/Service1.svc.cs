@@ -30,14 +30,14 @@ namespace PAW.FinalProject.WCF
         public IList<Category> CarcarCategorias()
         {
             var Specification = new Logic.Specification.Metodos_De_Especificacion();
-            var result = Specification.CargarCategorias();
+            var result = Specification.CargarCategoria();
             return result;
         }
 
         public IList<SubCategory> CarcarSubCategorias()
         {
             var Specification = new Logic.Specification.Metodos_De_Especificacion();
-            var result = Specification.CargarSubCategorias();
+            var result = Specification.CargarSubCategoria();
             return result;
         }
 
