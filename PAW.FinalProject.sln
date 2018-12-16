@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PAW.FinalProject.UnitTest",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PAW.FinalProject.DB", "PAW.FinalProject.DB\PAW.FinalProject.DB.csproj", "{B2F47CB1-20FB-4343-A72C-D741C08771BC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PAW.FinalProject.MVC3", "PAW.FinalProject.MVC3\PAW.FinalProject.MVC3.csproj", "{527EE946-BBA8-46C0-B8F6-CC236D5C9CC4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{B2F47CB1-20FB-4343-A72C-D741C08771BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2F47CB1-20FB-4343-A72C-D741C08771BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2F47CB1-20FB-4343-A72C-D741C08771BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{527EE946-BBA8-46C0-B8F6-CC236D5C9CC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{527EE946-BBA8-46C0-B8F6-CC236D5C9CC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{527EE946-BBA8-46C0-B8F6-CC236D5C9CC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{527EE946-BBA8-46C0-B8F6-CC236D5C9CC4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
